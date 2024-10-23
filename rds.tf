@@ -8,7 +8,7 @@ resource "aws_db_instance" "this" {
   instance_class         = var.instance_class
   db_subnet_group_name   = aws_db_subnet_group.db_subnet.id
   vpc_security_group_ids = ["${aws_security_group.RD_allow_rule.id}"]
-  db_name                = var.db_name 
+  db_name                = var.db_name
   username               = var.username
   password               = var.password
   port                   = var.port
@@ -21,7 +21,7 @@ resource "aws_db_instance" "this" {
     ignore_changes = [password]
   }
 }
- 
+
 # Recurso que liga as subnets privadas A e C ao banco RDS
 resource "aws_db_subnet_group" "db_subnet" {
   name = "dbsubnet"

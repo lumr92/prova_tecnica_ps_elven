@@ -10,4 +10,4 @@ resource "aws_instance" "monitor" {
   subnet_id                   = aws_subnet.this["pub_a"].id
   associate_public_ip_address = true
   tags                        = merge(local.common_tags, { Name = "Monitor Machine" })
-} 
+}

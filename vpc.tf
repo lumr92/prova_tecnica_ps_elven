@@ -142,7 +142,10 @@ resource "aws_route_table" "private_rt_2" {
     cidr_block = "0.0.0.0/0"
   }
 
-   
+  tags = {
+    Project = "prova-tecnica-ps"
+    Name = "route table private subnet2"
+  }
 }
 
 # Criando associação na tabela de rotas para a subnet privada 1
