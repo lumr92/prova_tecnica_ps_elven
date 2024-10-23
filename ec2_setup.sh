@@ -8,3 +8,4 @@ sudo ansible-playbook playbook.yml \
 --extra-vars "wp_db_name=${wp_db_name} wp_username=${wp_username} wp_user_password=${wp_user_password} wp_db_host=${wp_db_host}"
 wget https://projetoformacaosrelumr921298290312.s3.us-west-1.amazonaws.com/node_exporter.sh
 sh node_exporter.sh
+ 

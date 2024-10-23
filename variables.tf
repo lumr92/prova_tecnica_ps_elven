@@ -65,7 +65,7 @@ variable "instance_class" {
   default     = "db.t2.micro"
   type        = string
 }
-
+ 
 variable "parameter_group_name" {
   description = "nome que dos parametros associados ao db"
   default     = "default.mysql5.7"

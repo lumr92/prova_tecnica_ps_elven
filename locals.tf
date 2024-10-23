@@ -8,4 +8,4 @@ locals {
     Owner     = "Lucas Rodrigues"
     Service   = "Wordpress Turbinado"
   }
-}
+} 

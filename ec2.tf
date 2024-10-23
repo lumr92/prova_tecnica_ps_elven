@@ -19,4 +19,4 @@ resource "aws_instance" "maquina" {
   tags = {
     Name = "Terraform_com_ansible_e_wordpress"
   }
-}
+} 

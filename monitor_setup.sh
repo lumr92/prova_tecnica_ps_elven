@@ -7,4 +7,4 @@ sudo apt install unzip -y
 unzip prometheus_grafana.zip
 cd prometheus_grafana
 sudo docker network create monitoring
-sudo /usr/local/bin/docker-compose up -d
+sudo /usr/local/bin/docker-compose up -d 
