@@ -13,10 +13,22 @@ resource "aws_instance" "maquina" {
       wp_db_host       = aws_db_instance.this.address
   })
   monitoring                  = true
-  subnet_id                   = aws_subnet.this["pub_a"].id
+  subnet_id                   = aws_subnet.public_subnet_1.id
   associate_public_ip_address = true
 
   tags = {
     Name = "Terraform_com_ansible_e_wordpress"
   }
+}
+
+# Gerando uma chave privada .pem para acesso a instância
+resource "tls_private_key" "chave_prova_ps" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+# Salvando a chave .pem em um arquivo e salvando o mesmo no meu pc
+resource "local_file" "private_key_pem" {
+  content  = tls_private_key.chave_prova_ps.private_key_pem
+  filename = "${pathexpand("~/Downloads")}/(var.key_aws_instance)"
 }

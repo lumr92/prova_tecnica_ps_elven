@@ -1,5 +1,5 @@
 # Criando auto scaling group
-resource "aws_autoscaling_group" "ASG-WP" {
+/*resource "aws_autoscaling_group" "ASG-WP" {
   name = "ASG WP"
   desired_capacity = 2
   max_size = 4
@@ -10,3 +10,4 @@ resource "aws_autoscaling_group" "ASG-WP" {
   health_check_type = "EC2"
   launch_configuration = aws_launch_configuration.webserver-launch-config.Name
   vpc_zone_identifier = ["${aws_subnet.this.id}", "${aws_subnet.this.id}"]
+}*/
