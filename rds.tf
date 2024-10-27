@@ -1,6 +1,6 @@
 # Arquivo com recurso de criação da rds
 
-resource "aws_db_instance" "this" {
+resource "aws_db_instance" "bd_wordpress" {
   allocated_storage      = var.allocated_storage
   storage_type           = var.storage_type
   engine                 = var.engine
@@ -20,13 +20,18 @@ resource "aws_db_instance" "this" {
   lifecycle {
     ignore_changes = [password]
   }
+
+tags = {
+  Name = "rds_wordpress"
+}
+
 }
 
 # Recurso que liga as subnets privadas A e C ao banco RDS
 resource "aws_db_subnet_group" "db_subnet" {
   name = "dbsubnet"
   subnet_ids = [
-    aws_subnet.this["pvt_a"].id,
-    aws_subnet.this["pvt_c"].id
+    aws_subnet.private_subnet_1.id,
+    aws_subnet.private_subnet_2.id
   ]
 }

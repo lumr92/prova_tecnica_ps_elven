@@ -1,17 +1,16 @@
 # Arquivo para administrar os security groups da ec2 e rds
 
-# Security group WP
-resource "aws_security_group" "sg_sg" {
+resource "aws_security_group" "sg_wordpress" {
   name        = var.name_security_group
   description = "Allow ssh inbound traffic"
-  vpc_id      = aws_vpc.this.id
+  vpc_id      = aws_vpc.main_vpc.id
 
   ingress {
     description = "SSH"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = [output.show_ip.value]
   } 
 
   ingress {
@@ -36,7 +35,6 @@ resource "aws_security_group" "sg_sg" {
   }
 }
 
-# Security group RDS
 resource "aws_security_group" "sg_rds" {
   vpc_id = aws_vpc.this.id
 
@@ -44,7 +42,7 @@ resource "aws_security_group" "sg_rds" {
     from_port       = 3306
     to_port         = 3306
     protocol        = "tcp"
-    security_groups = ["${aws_security_group.allow_ssh.id}"]
+    security_groups = ["${aws_security_group.sg_wordpress.id}"]
   }
 
   egress {
@@ -55,8 +53,7 @@ resource "aws_security_group" "sg_rds" {
   }
 
   tags = {
-    Project = "prova-tecnica-ps"
-    Name = "SG_RDS"
+      Name = "SG_RDS"
   }
 }
 
@@ -80,7 +77,6 @@ resource "aws_security_group" "sg_elb" {
   }
 
   tags = {
-    Project = "prova-tecnica-ps"
     Name = "SG_ELB"
   }
 }
@@ -88,11 +84,11 @@ resource "aws_security_group" "sg_elb" {
 # Recurso que cria uma regra para o security group da EC2_Wordpress ter acesso ao banco RDS
 resource "aws_security_group_rule" "rds_ingress" {
   type                     = "ingress"
-  security_group_id        = aws_security_group.allow_ssh.id
+  security_group_id        = aws_security_group.sg_wordpress.id
   protocol                 = "tcp"
   from_port                = 3306
   to_port                  = 3306
-  source_security_group_id = aws_security_group.allow_ssh.id
+  source_security_group_id = aws_security_group.sg_wordpress.id
 }
 
 

@@ -83,7 +83,7 @@ variable "instance_class" {
 }
 
 variable "parameter_group_name" {
-  description = "nome que dos parametros associados ao db"
+  description = "nome dos parametros associados ao db"
   default     = "default.mysql5.7"
   type        = string
 }
